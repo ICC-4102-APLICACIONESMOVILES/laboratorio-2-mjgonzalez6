@@ -7,6 +7,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 
 /**
@@ -22,6 +27,9 @@ public class FormView extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    private ListView mainListView ;
+    private ArrayAdapter<String> listAdapter ;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -52,12 +60,22 @@ public class FormView extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(LayoutInflater inflater, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        View v = inflater.inflate(R.layout.fragment_complaints, container, false);
+
+        mainListView = (ListView)v.findViewById( R.id.mainListView );
+
+        String[] forms = new String[] {"Form 1, 15/11/1983, descripcion", "Form 2, 01/01/2017, descripcion", "Form 3, 01/01/2018, descripcion"};
+        ArrayList<String> formList = new ArrayList<>();
+        listAdapter = new ArrayAdapter<String>(getActivity(), R.layout.simplerow, formList);
+        formList.addAll( Arrays.asList(forms) );
+
+        mainListView.setAdapter( listAdapter );
     }
 
     @Override
@@ -74,7 +92,7 @@ public class FormView extends Fragment {
         }
     }
 
-    @Override
+    /*@Override
     public void onAttach(Context context) {
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
@@ -83,7 +101,7 @@ public class FormView extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
-    }
+    }*/
 
     @Override
     public void onDetach() {

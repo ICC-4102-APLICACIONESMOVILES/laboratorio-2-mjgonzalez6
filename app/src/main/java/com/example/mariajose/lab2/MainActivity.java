@@ -23,22 +23,14 @@ import android.widget.ArrayAdapter;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, FormSummary.OnFragmentInteractionListener, Form.OnFragmentInteractionListener, FormView.OnFragmentInteractionListener {
 
-    private ListView mainListView ;
-    private ArrayAdapter<String> listAdapter ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        mainListView = (ListView)findViewById(R.id.mainListView );
-
-        String[] forms = new String[] {"Form 1, dd/mm/aaaa, descripcion", "Form 2, dd/mm/aaaa, descripcion", "Form 3, dd/mm/aaaa, descripcion"};
-        ArrayList<String> formList = new ArrayList<String>();
-        formList.addAll( Arrays.asList(forms) );
-
-        listAdapter = new ArrayAdapter<String>(this, R.layout.simplerow, formList);
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
