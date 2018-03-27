@@ -1,5 +1,7 @@
 package com.example.mariajose.lab2;
 
+import android.app.Fragment;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -19,7 +21,7 @@ import android.widget.ListView;
 import android.widget.ArrayAdapter;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, FormSummary.OnFragmentInteractionListener, Form.OnFragmentInteractionListener, FormView.OnFragmentInteractionListener {
 
     private ListView mainListView ;
     private ArrayAdapter<String> listAdapter ;
@@ -29,11 +31,11 @@ public class MainActivity extends AppCompatActivity
 
         mainListView = (ListView)findViewById(R.id.mainListView );
 
-        String[] planets = new String[] {"Form 1, dd/mm/aaaa, descripcion", "Form 2, dd/mm/aaaa, descripcion", "Form 3, dd/mm/aaaa, descripcion"};
-        ArrayList<String> planetList = new ArrayList<String>();
-        planetList.addAll( Arrays.asList(planets) );
+        String[] forms = new String[] {"Form 1, dd/mm/aaaa, descripcion", "Form 2, dd/mm/aaaa, descripcion", "Form 3, dd/mm/aaaa, descripcion"};
+        ArrayList<String> formList = new ArrayList<String>();
+        formList.addAll( Arrays.asList(forms) );
 
-        listAdapter = new ArrayAdapter<String>(this, R.layout.simplerow, planetList);
+        listAdapter = new ArrayAdapter<String>(this, R.layout.simplerow, formList);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -98,23 +100,25 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        android.support.v4.app.Fragment  fragment = null;
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.frag1) {
+            fragment = new FormSummary();
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.frag2) {
+            fragment = new Form();
+        } else if (id == R.id.frag3) {
+            fragment = new FormView();
 
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }
