@@ -13,11 +13,28 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import android.widget.ListView;
+import android.widget.ArrayAdapter;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private ListView mainListView ;
+    private ArrayAdapter<String> listAdapter ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        mainListView = (ListView)findViewById(R.id.mainListView );
+
+        String[] planets = new String[] {"Form 1, dd/mm/aaaa, descripcion", "Form 2, dd/mm/aaaa, descripcion", "Form 3, dd/mm/aaaa, descripcion"};
+        ArrayList<String> planetList = new ArrayList<String>();
+        planetList.addAll( Arrays.asList(planets) );
+
+        listAdapter = new ArrayAdapter<String>(this, R.layout.simplerow, planetList);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -40,6 +57,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        mainListView.setAdapter( listAdapter );
     }
 
     @Override
